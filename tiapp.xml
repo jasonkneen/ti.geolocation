@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+	<id>com.bouncingfish.geodemo</id>
+	<name>geodemo</name>
+	<version>1.0</version>
+	<publisher>not specified</publisher>
+	<url>http://www.bouncingfish.com</url>
+	<description />
+	<copyright>not specified</copyright>
+	<icon>appicon.png</icon>
+	<fullscreen>false</fullscreen>
+	<navbar-hidden>false</navbar-hidden>
+	<analytics>true</analytics>
+	<guid>05d5ad2d-d9d0-4137-9f03-72c5762b807d</guid>
+	<property name="ti.ui.defaultunit" type="string">dp</property>
+	<property name="run-on-main-thread" type="bool">true</property>
+	<ios>
+		<min-ios-ver>10.0</min-ios-ver>
+		<enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
+		<use-app-thinning>true</use-app-thinning>
+		<plist>
+			<dict>
+				<key>UISupportedInterfaceOrientations~iphone</key>
+				<array>
+					<string>UIInterfaceOrientationPortrait</string>
+				</array>
+				<key>UISupportedInterfaceOrientations~ipad</key>
+				<array>
+					<string>UIInterfaceOrientationPortrait</string>
+					<string>UIInterfaceOrientationPortraitUpsideDown</string>
+					<string>UIInterfaceOrientationLandscapeLeft</string>
+					<string>UIInterfaceOrientationLandscapeRight</string>
+				</array>
+				<key>UIRequiresPersistentWiFi</key>
+				<false />
+				<key>UIPrerenderedIcon</key>
+				<false />
+				<key>UIStatusBarHidden</key>
+				<false />
+				<key>UIStatusBarStyle</key>
+				<string>UIStatusBarStyleLightContent</string>
+				<key>NSLocationWhenInUseUsageDescription</key>
+				<string>We need your location to find other users</string>
+				<key>NSLocationWhenInUseUsageDescription</key>
+				<string>We need your location to find other users</string>
+				<key>NSLocationAlwaysUsageDescription</key>
+				<string>We need your location to find other users</string>
+				<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+				<string>We need your location to find other users</string>
+				<key>NSPhotoLibraryUsageDescription</key>
+				<string>
+					Can we use your photo library to import photos?
+				</string>
+				<key>NSPhotoLibraryAddUsageDescription</key>
+				<string>
+					Can we use your photo library to import profile photos?
+				</string>
+				<key>NSCameraUsageDescription</key>
+				<string>
+					Can we use your camera take profile photos?
+				</string>
+				<key>UIBackgroundModes</key>
+				<array>
+					<string>location</string>
+					<string>fetch</string>
+					<string>remote-notification</string>
+				</array>
+			</dict>
+		</plist>
+	</ios>
+	<android xmlns:android="http://schemas.android.com/apk/res/android">
+		<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1">		
+			<uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COURSE_LOCATION" />            
+			<application>
+				<!-- Replace "YOUR_API_KEY" with the Google API key you obtained -->
+				<meta-data android:name="com.google.android.geo.API_KEY" android:value="YOUR_API_KEY" />
+			</application>
+			<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+		</manifest>		
+	</android>
+	<modules>
+		<module>ti.map</module>
+		<module platform="android">ti.playservices</module>
+	</modules>
+	<deployment-targets>
+		<target device="android">true</target>
+		<target device="ipad">true</target>
+		<target device="iphone">true</target>
+	</deployment-targets>
+	<sdk-version>8.2.0.GA</sdk-version>
+	<plugins>
+		<plugin version="1.0">ti.alloy</plugin>
+	</plugins>
+</ti:app>

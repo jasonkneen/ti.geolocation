@@ -1,0 +1,26 @@
+<Alloy>
+	<NavigationWindow>
+		<Window title="Background GPS Demo" layout="vertical">
+			<RightNavButton>
+				<Button onClick="startOrStop">Stop</Button>
+			</RightNavButton>
+			<TableView onChange="updateSettings" platform="ios">
+				<TableViewRow>
+					<Label class="rowTitle">Background</Label>
+					<Switch id="allowsBackgroundLocationUpdates" class="rowSwitch" value="true" />
+				</TableViewRow>
+				<TableViewRow>
+					<Label class="rowTitle">Show background (blue) indicator</Label>
+					<Switch id="showBackgroundLocationIndicator" class="rowSwitch" value="true" />
+				</TableViewRow>
+				<TableViewRow>
+					<Label class="rowTitle">Significant location change</Label>
+					<Switch id="trackSignificantLocationChange" class="rowSwitch" value="false" />
+				</TableViewRow>
+			</TableView>
+			<View id="mapWrapper">
+			<Label zIndex="1000" top="10" id="address"/>
+			</View>
+		</Window>
+	</NavigationWindow>
+</Alloy>

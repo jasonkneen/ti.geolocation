@@ -1,0 +1,11 @@
+"Window": {	
+	barColor: "red",
+	navTintColor: "white",
+	titleAttributes: {
+		color: "white"
+	}
+}
+
+"Switch" : {
+	onTintColor: "red"
+}
