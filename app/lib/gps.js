@@ -82,6 +82,7 @@ exports.startGeoLocationTracking = function (callback) {
         // add a stop tracking option
         exports.stopGeoLocationTracking = function () {
             console.log("gps -- stopping location tracking");
+            Ti.Geolocation.removeEventListener("location", localHandler);
             Ti.Geolocation.removeEventListener("locationupdatepaused", paused);
             Ti.Geolocation.removeEventListener("locationupdateresumed", resumed);
         };
