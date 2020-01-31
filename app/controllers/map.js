@@ -18,17 +18,6 @@ function updateSettings(e) {
     Ti.Geolocation[e.source.id] = e.value;
 }
 
-// start or stop GPS tracking
-function startOrStop(e) {
-    if (e.source.title == stopText) {
-        e.source.title = startText;
-        stop();
-    } else {
-        e.source.title = stopText;
-        start();
-    }
-}
-
 // creates an annotation for a given lon and lat
 function createAnnotation(location) {
     mapview.addAnnotation(Map.createAnnotation({
@@ -43,26 +32,42 @@ function createAnnotation(location) {
 }
 
 // start things off
-function start() {
+function startOrStop() {
+
+    console.error($.startOrStopButton.title );
+    
+    if ($.startOrStopButton.title === stopText) {        
+        $.startOrStopButton.title = startText;            
+        gps.stopGeoLocationTracking();
+        return;
+    } 
+    
     // main location handler
-    gps.startGeoLocationTracking(function (e) {
-              
+    gps.startGeoLocationTracking(function (result) {
+
+        // location not enabled
+        if (result === false) {
+            return;
+        }
+
+        $.startOrStopButton.title = stopText;
+
         // save the location to a collection
         Alloy.Collections.locationChanges.add({
-            longitude: e.longitude,
-            latitude: e.latitude
+            longitude: result.longitude,
+            latitude: result.latitude
         });
 
         // set the mapview view around the current location
         mapview.location = {
-            latitude: e.latitude,
-            longitude: e.longitude,
+            latitude: result.latitude,
+            longitude: result.longitude,
             latitudeDelta: 0.07,
             longitudeDelta: 0.07
-        }; 
+        };
 
         // update the address label
-        e.getAddress(function (address) {
+        result.getAddress(function (address) {
             $.address.text = address.street;
         });
 
@@ -70,8 +75,8 @@ function start() {
         if (OS_IOS && !Ti.Geolocation.trackSignificantLocationChange && updateCount == 10) {
             console.warn("Creating every 10 changes...")
             createAnnotation({
-                longitude: e.longitude,
-                latitude: e.latitude
+                longitude: result.longitude,
+                latitude: result.latitude
             });
             updateCount = 0
         }
@@ -79,25 +84,20 @@ function start() {
         // if we're using SLC then we can log a pin normally
         if (Ti.Geolocation.trackSignificantLocationChange || OS_ANDROID) {
             createAnnotation({
-                longitude: e.longitude,
-                latitude: e.latitude
+                longitude: result.longitude,
+                latitude: result.latitude
             });
         }
 
         // increase the location counter
-        updateCount++;        
+        updateCount++;
     });
-}
-
-// stop tracking
-function stop() {
-    gps.stopGeoLocationTracking()
 }
 
 // setup our mapview
 var mapview = Map.createView({
     rotateEnabled: true,
-    mapType: Map.MUTED_STANDARD_TYPE,    
+    mapType: Map.MUTED_STANDARD_TYPE,
     userLocation: true
 });
 
@@ -117,5 +117,3 @@ mapview.addEventListener("clusterstart", function (e) {
 
 // add the map to the view
 $.mapWrapper.add(mapview);
-
-start();

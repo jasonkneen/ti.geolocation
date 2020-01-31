@@ -20,7 +20,8 @@ function getLocationPermissions(callback) {
                     alert("We will only be able to track you when the app is running. You can change this in your device location settings.");
                     if (callback) callback();
                 } else {
-                    alert("Please enable location services for this app in your device settings.");
+                    alert("Please enable location services for this app in your device settings.");                   
+                    callback(false); 
                 }
             });
         }

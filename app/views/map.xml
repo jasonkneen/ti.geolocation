@@ -2,7 +2,7 @@
 	<NavigationWindow>
 		<Window title="Background GPS Demo" layout="vertical">
 			<RightNavButton>
-				<Button onClick="startOrStop">Stop</Button>
+				<Button id="startOrStopButton" onClick="startOrStop">Start</Button>
 			</RightNavButton>
 			<TableView onChange="updateSettings" platform="ios">
 				<TableViewRow>
